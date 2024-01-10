@@ -1,0 +1,399 @@
+internal class Program
+    {
+        static int LC = 0;
+        static int luachon()
+        {
+            int LC;
+            Menu.menu();
+            LC = int.Parse(Console.ReadLine());
+            return LC;
+        }
+
+        static void Main()
+        {
+            NgayThang nhapngay1 = new NgayThang();
+            NgayThang nhapngay2 = new NgayThang();
+            SinhVien sinhvien = new SinhVien();
+            CongNhan congnhan = new CongNhan();
+            int soluongsv = 0, soluongcn = 0;
+            SinhVien[] luu = new SinhVien[50];
+            CongNhan[] luutam = new CongNhan[50];
+            Nguoi[] xuat = new Nguoi[50];
+            bool kiemtra = false;
+            do
+            {
+                LC = luachon();
+                switch (LC)
+                {
+                    case 1:
+                        Console.WriteLine();
+                        nhapngay1 = NgayThang.Nhap();
+                        Console.WriteLine("\n");
+                        break;
+                    case 2:
+                        Console.WriteLine();
+                        nhapngay1.Xuat();
+                        Console.WriteLine("\n");
+                        break;
+                    case 3:
+                        Console.WriteLine();
+                        if (NgayThang.KiemTraNamNhuan(nhapngay1.nam) == true)
+                            Console.WriteLine("{0} là năm nhuận", nhapngay1.nam);
+                        else Console.WriteLine("{0} là năm không nhuận", nhapngay1.nam);
+                        Console.WriteLine("\n");
+                        break;
+                    case 4:
+                        Console.WriteLine();
+                        Console.Write("Khoảng cách là: {0} ngày kể từ ngày 1/1/1 ", NgayThang.TinhTheoMoc(nhapngay1));
+                        Console.WriteLine("\n");
+                        break;
+                    case 5:
+                        Console.WriteLine();
+                        Console.WriteLine("Nhập ngày tháng năm thứ 1");
+                        nhapngay1 = NgayThang.Nhap();
+                        Console.WriteLine("Nhập ngày tháng năm thứ 2");
+                        nhapngay2 = NgayThang.Nhap();
+                        Console.WriteLine($"Số ngày từ ngày {nhapngay1.ngay}/{nhapngay1.thang}/{nhapngay1.nam} đến ngày {nhapngay2.ngay}/{nhapngay2.thang}/{nhapngay2.nam} là: " + NgayThang.TinhSoNgayGiuaHaiNgay(nhapngay1, nhapngay2));
+                        Console.WriteLine("\n");
+                        break;
+                    case 6:
+                        Console.WriteLine();
+                        Console.WriteLine("Nhập ngày tháng năm để tìm thứ");
+                        nhapngay1 = NgayThang.Nhap();
+                        Console.Write($"Thứ của ngày {nhapngay1.ngay}/{nhapngay1.thang}/{nhapngay1.nam} là: " + NgayThang.Thu(nhapngay1) + "\n");                     
+                        Console.WriteLine("\n");
+                        break;
+                    case 7:
+                        Console.WriteLine();
+                        sinhvien.Nhap();
+                        Console.WriteLine("\n");
+                        break;
+                    case 8:
+                        Console.WriteLine();
+                        sinhvien.Xuat();
+                        Console.WriteLine("\n");
+                        break;
+                    case 9:
+                        Console.WriteLine();
+                        Console.WriteLine("Điểm trung bình của sinh viên là: " + sinhvien.tinhdiemTB());
+                        Console.WriteLine("\n");
+                        break;
+                    case 10:
+                        Console.WriteLine();
+                        congnhan.Nhap();
+                        Console.WriteLine("\n");
+                        break;
+                    case 11:
+                        Console.WriteLine();
+                        congnhan.Xuat();
+                        Console.WriteLine("\n");
+                        break;
+                    case 12:
+                        Console.WriteLine();
+                        Console.WriteLine("Tiền lương của công nhân là: " + congnhan.TienLuong());
+                        Console.WriteLine("\n");
+                        break;
+                    case 13:
+                        Console.WriteLine();
+                        do
+                        {
+                            Console.Write("Nhập số lượng sinh viên: ");
+                            soluongsv = int.Parse(Console.ReadLine());
+                        } while (soluongsv < 0);
+                        SinhVien[] danhsachsv = new SinhVien[soluongsv];
+                        //Console.WriteLine();
+                        for (int i = 0; i < soluongsv; i++)
+                        {
+                            Console.WriteLine();
+                            danhsachsv[i] = new SinhVien();
+                            Console.Write($"Nhập thông tin sinh viên {i + 1}");
+                            SinhVien svi = new SinhVien();
+                            Console.WriteLine();
+                            danhsachsv[i].Nhap();
+                            xuat[i] = danhsachsv[i];
+                        }
+                        for (int i = 0; i < soluongsv; i++)
+                        {
+                            if ((danhsachsv[i].toan > 8 && danhsachsv[i].ly > 8 && danhsachsv[i].hoa >= 5) ||
+                                (danhsachsv[i].toan >= 5 && danhsachsv[i].ly > 8 && danhsachsv[i].hoa > 8) ||
+                                (danhsachsv[i].toan > 8 && danhsachsv[i].ly >= 5 && danhsachsv[i].hoa > 8))
+                            {
+                                luu[i] = danhsachsv[i];
+                                kiemtra = true;
+                            }
+                        }
+                        Console.WriteLine("\n");
+                        break;
+                    case 14:
+                        Console.WriteLine();
+                        do
+                        {
+                            Console.Write("Nhập số lượng công nhân: ");
+                            soluongcn = int.Parse(Console.ReadLine());
+                        } while (soluongcn < 0);
+                        CongNhan[] danhsachcn = new CongNhan[soluongcn];
+                        Console.WriteLine("Nhập thông tin của công nhân");
+                        for (int i = 0; i < soluongcn; i++)
+                        {
+                            danhsachcn[i] = new CongNhan();
+                            Console.Write($"Nhập thông tin công nhân {i + 1}");
+                            Console.WriteLine();
+                            danhsachcn[i].Nhap();
+                            luutam[i] = danhsachcn[i];
+                        }
+                        Console.WriteLine("\n");
+                        break;
+                    case 15:
+                        Console.WriteLine("Danh sách sinh viên có ít nhất 2 môn học điểm > 8 và điểm còn lại không < 5");
+                        for (int i = 0; i < soluongsv; i++)
+                        {
+                            if (kiemtra == true)
+                            {
+                                luu[i].Xuat(); // Xuất thông tin sinh viên
+                            }
+                            else
+                                Console.WriteLine("Trong danh sách không có sinh viên thỏa mãn điều kiện");
+                        }
+                        Console.WriteLine("\n");
+                        break;
+                    case 16:
+                        double tongLuong = 0;
+                        for (int i = 0; i < soluongcn; i++)
+                        {
+                            tongLuong += luutam[i].TienLuong();
+                        }
+                        Console.WriteLine("Tổng lương của các công nhân: " + tongLuong);
+                        break;
+                    case 17:
+                        Environment.Exit(0);
+                        break;
+                }
+            } while (LC != 0);
+            Console.ReadKey();
+        }
+        class Menu
+        {
+            public static void menu()
+            {
+
+                Console.OutputEncoding = Encoding.Unicode;
+                Console.WriteLine("CHƯƠNG TRÌNH ");
+                Console.WriteLine("-------------------------------------");
+                Console.WriteLine("Chọn 1. Nhập ngày tháng năm");
+                Console.WriteLine("Chọn 2. Xuất ngày tháng năm vừa nhập");
+                Console.WriteLine("Chọn 3. Kiểm tra năm nhuận");
+                Console.WriteLine("Chọn 4. Tính số ngày đến thời điểm một ngày nhập vào từ bàn phím (mốc ban đầu là ngày 1/1/1)");
+                Console.WriteLine("Chọn 5. Tính số  ngày giữa 2 ngày bất kỳ");
+                Console.WriteLine("Chọn 6. Xác định thứ dựa trên ngày nhập vào");
+                Console.WriteLine("Chọn 7. Khai báo thông tin Sinh viên");
+                Console.WriteLine("Chọn 8. Xuất ra thông tin Sinh viên");
+                Console.WriteLine("Chọn 9. Tính điểm trung bình Sinh viên");
+                Console.WriteLine("Chọn 10. Khai báo thông tin Công nhân");
+                Console.WriteLine("Chọn 11. Xuất ra thông tin Công nhân");
+                Console.WriteLine("Chọn 12. Tính tiền lương của Công nhân");
+                Console.WriteLine("Chọn 13. Nhập dãy Sinh viên");
+                Console.WriteLine("Chọn 14. Nhập dãy Công nhân");
+                Console.WriteLine("Chọn 15. Xác định trong dãy đó các Sinh viên có ít nhất 2 điểm môn học lớn hơn 8 và điểm còn lại không nhỏ hơn 5");
+                Console.WriteLine("Chọn 16. Tính tổng lương của các Công nhân trong dãy vừa nhập");
+                Console.WriteLine("Chọn 17. Thoát chương trình");
+                Console.Write("Mời bạn chọn thao tác: ");
+            }
+        }
+        class NgayThang
+        {
+            public int ngay;
+            public int thang;
+            public int nam;
+            public NgayThang()
+            {
+                ngay = 1;
+                thang = 1;
+                nam = 1;
+            }
+            public NgayThang(int ngay, int thang, int nam)
+            {
+                this.ngay = ngay;
+                this.thang = thang;
+                this.nam = nam;
+            }
+            public static NgayThang Nhap()
+            {
+                NgayThang ngaythangnam = new NgayThang();
+                do
+                {
+                    Console.Write("Nhập ngày: ");
+                    ngaythangnam.ngay = int.Parse(Console.ReadLine());
+                } while (ngaythangnam.ngay < 1 || ngaythangnam.ngay > 31);
+                do
+                {
+                    Console.Write("Nhập tháng: ");
+                    ngaythangnam.thang = int.Parse(Console.ReadLine());
+                } while (ngaythangnam.thang < 1 || ngaythangnam.thang > 12);
+                
+                Console.Write("Nhập năm: ");
+                ngaythangnam.nam = int.Parse(Console.ReadLine());
+                
+                Console.WriteLine();
+                return ngaythangnam;
+            }
+
+            public void Xuat()
+            {
+                Console.WriteLine("Ngày sinh: {0}/{1}/{2}", ngay, thang, nam);
+            }
+            public static bool KiemTraNamNhuan(int nam)
+            {
+                if ((nam % 4 == 0 && nam % 100 != 0) || nam % 400 == 0)
+                    return true;
+                return false;
+            }
+            //tham khảo
+            public static int TinhTheoNgayThang(NgayThang m)
+            {
+                int songaytheongayvathang = m.ngay;
+                for (int i = 1; i < m.thang; i++)
+                {
+                    if (i == 2)
+                    {
+                        if (KiemTraNamNhuan(m.nam) == true)
+                            songaytheongayvathang = songaytheongayvathang + 29;
+                        else
+                            songaytheongayvathang = songaytheongayvathang + 28;
+                    }
+                    else
+                    {
+                        if (i == 4 || i == 6 || i == 9 || i == 11)
+                            songaytheongayvathang = songaytheongayvathang + 30;
+                        else songaytheongayvathang = songaytheongayvathang + 31;
+                    }
+                }
+                return songaytheongayvathang;
+            }
+            public static int TinhTheoNam(NgayThang n)
+            {
+                int songaytheonam = 0;
+                for (int i = 1; i < n.nam; i++)
+                {
+                    if (KiemTraNamNhuan(i) == true)
+                        songaytheonam = songaytheonam + 366;
+                    else songaytheonam = songaytheonam + 365;
+                }
+                songaytheonam = songaytheonam + TinhTheoNgayThang(n);
+                return songaytheonam;
+            }
+            public static int TinhTheoMoc(NgayThang ngay)
+            {
+                int khoangcach = TinhTheoNam(ngay);
+                return khoangcach;
+            }
+            public static int TinhSoNgayGiuaHaiNgay(NgayThang ngay1, NgayThang ngay2)
+            {
+                int ketqua = TinhTheoMoc(ngay1) - TinhTheoMoc(ngay2);
+                ketqua = Math.Abs(ketqua);
+                return (ketqua);
+            }
+            public static string Thu(NgayThang m)
+            {
+                if (TinhTheoMoc(m) % 7 == 0)
+                    return "Chủ nhật";
+                else if (TinhTheoMoc(m) % 7 == 1)
+                    return "Thứ hai";
+                else if (TinhTheoMoc(m) % 7 == 2)
+                    return "Thứ ba";
+                else if (TinhTheoMoc(m) % 7 == 3)
+                    return "Thứ tư";
+                else if (TinhTheoMoc(m) % 7 == 4)
+                    return "Thứ năm";
+                else if (TinhTheoMoc(m) % 7 == 5)
+                    return "Thứ sáu";
+                else if (TinhTheoMoc(m) % 7 == 6)
+                    return "Thứ bảy";
+                return "";
+            }
+        }
+        class Nguoi
+        {
+            protected string Ten;
+            protected NgayThang NgaySinh;
+            public virtual void Nhap()
+            {
+                Console.Write("Nhập tên: ");
+                Ten = Console.ReadLine();
+                Console.WriteLine();
+                NgaySinh = new NgayThang();
+                Console.WriteLine("Nhập ngày sinh");
+                NgaySinh = NgayThang.Nhap();
+            }
+            public virtual void Xuat()
+            {
+                Console.WriteLine("Tên: {0}", Ten);
+                NgaySinh.Xuat();
+            }
+        }
+        class SinhVien : Nguoi
+        {
+            public string tenLop;
+            public float toan;
+            public float ly;
+            public float hoa;
+            public override void Nhap()
+            {
+                base.Nhap();//kế thừa từ lớp nhập Nguoi
+                Console.OutputEncoding = Encoding.UTF8;
+                Console.Write("Nhập tên lớp: ");
+                tenLop = Console.ReadLine();
+                do
+                {
+                    Console.Write("Nhập điểm toán: ");
+                    toan = float.Parse(Console.ReadLine());
+                }while (toan < 0 || toan > 10);
+                do
+                {
+                    Console.Write("Nhập điểm lý: ");
+                    ly = float.Parse(Console.ReadLine());
+                } while (ly < 0 || ly > 10);
+                do
+                {
+                    Console.Write("Nhập điểm hóa: ");
+                    hoa = float.Parse(Console.ReadLine());
+                } while (hoa < 0 || hoa > 10);
+            }
+            public override void Xuat()
+            {
+                base.Xuat();
+                Console.OutputEncoding = Encoding.UTF8;
+                //Console.Write();
+                Console.WriteLine("Tên lớp: " + tenLop);
+                Console.WriteLine("Điểm toán: " + toan);
+                Console.WriteLine("Điểm lý: " + ly);
+                Console.WriteLine("Điểm hóa: " + hoa);
+            }
+            public float tinhdiemTB()
+            {
+                return (toan + ly + hoa) / 3;
+            }
+        }
+        class CongNhan : Nguoi
+        {
+            protected string tenCongty;
+            protected int songayLamviec;
+            public override void Nhap()
+            {
+                base.Nhap();
+                Console.Write("Nhập tên công ty: ");
+                tenCongty = Console.ReadLine();
+                Console.Write("Nhập số ngày làm việc: ");
+                songayLamviec = int.Parse(Console.ReadLine());
+            }
+            public override void Xuat()
+            {
+                base.Xuat();
+                Console.WriteLine("Tên công ty: " + tenCongty);
+                Console.WriteLine("Số ngày làm việc: " + songayLamviec);
+            }
+            public float TienLuong()
+            {
+                return (songayLamviec * 200000);
+            }    
+        }
+    }
